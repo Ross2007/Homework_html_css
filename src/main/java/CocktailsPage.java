@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -14,47 +15,39 @@ public class CocktailsPage {
     }
 
     @FindBy(css = ".selected")
-    private WebElement searchElementDropdownWines;
+    private WebElement DropdownWines;
     @FindBy(css = "[data-value=\"red\"]")
-    private WebElement searchElementRedWineCocktails;
-    @FindBy(css = ".tile.recipe-tile[data-types=\"red\"]")
+    private WebElement RedWineCocktails;
+    @FindBy(css = ".grid filter-grid recipes")
     private List<WebElement> cocktailsResults;
-    @FindBy(css = ".tile.recipe-tile[data-types=\"red\"], .tile.recipe-tile[data-types=\"bubbles\"]")
-    private List<WebElement> cocktailsResults2;
     @FindBy(css = "[href=\"raspberry-rose\"]")
-    private WebElement searchElementCocktailsRaspberryRose;
+    private WebElement CocktailsRaspberryRose;
     @FindBy(css = "[data-value=\"bubbles\"]")
-    private WebElement searchElementSparklingWineCocktails;
+    private WebElement SparklingWineCocktails;
 
-    public void clickElementDropdownWines() {
-        searchElementDropdownWines.click();
+    public void clickRedWineCocktails() {
+        DropdownWines.click();
+        RedWineCocktails.click();
     }
 
-    public void clickElementRedWineCocktails() {
-        searchElementRedWineCocktails.click();
-    }
-
-    public List<WebElement> getElementCocktailsResults() {
+    public List<WebElement> getCocktailsResults() {
         return cocktailsResults;
     }
 
-    public List<WebElement> getElementCocktailsResults2() {
-        return cocktailsResults2;
+    public void clickCocktailsRaspberryRose() {
+        CocktailsRaspberryRose.click();
     }
 
-    public void clickElementCocktailsRaspberryRose() {
-        searchElementCocktailsRaspberryRose.click();
+
+    public void clickSparklingWineCocktails() {
+        SparklingWineCocktails.click();
     }
 
-    public WebElement getElementCocktailsRaspberryRose() {
-        return searchElementCocktailsRaspberryRose;
+    public WebElement getDropdownWines() {
+        return DropdownWines;
     }
-
-    public void clickElementSparklingWineCocktails() {
-        searchElementSparklingWineCocktails.click();
-    }
-
-    public WebElement getElementDropdownWines() {
-        return searchElementDropdownWines;
+    public void scrollToElement ()
+    { Actions builder = new Actions(driver);
+        builder.moveToElement(CocktailsRaspberryRose).build().perform();
     }
 }

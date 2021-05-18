@@ -16,26 +16,26 @@ public class StoresPage {
     }
 
     @FindBy(id = "locationName")
-    private WebElement searchElementLocationNameField;
+    private WebElement LocationNameField;
     @FindBy(css = ".search-submit")
-    private WebElement searchElementConfirmBtn;
+    private WebElement ConfirmBtn;
     @FindBy(css = ".results[style=\"display: block;\"]")
-    private WebElement searchElementResults;
+    private WebElement Results;
 
     public void enterStoreLocation() {
-        searchElementLocationNameField.sendKeys("Sydney");
+        LocationNameField.sendKeys("Sydney");
     }
 
-    public void clickCofirmBtn() {
-        searchElementConfirmBtn.click();
+    public void clickConfirmBtn() {
+        ConfirmBtn.click();
     }
 
-    public WebElement getElementResults() {
-        return searchElementResults;
+    public WebElement getResults() {
+        return Results;
     }
 
     public void waitForResults() {
         (new WebDriverWait(driver, Duration.ofSeconds(2)))
-                .until(ExpectedConditions.visibilityOf(searchElementResults));
+                .until(ExpectedConditions.visibilityOf(Results));
     }
 }

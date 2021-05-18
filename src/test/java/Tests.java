@@ -15,7 +15,7 @@ public class Tests {
     @BeforeEach
     public void before() {
         String basicUrl = "https://www.yellowtailwine.com/";
-        String pathToChromeDriver = "/home/user/Документы/Rossclasswork/src/test/resources/chromedriver";
+        String pathToChromeDriver = "src/test/resources/chromedriver";
         System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
         driver = new ChromeDriver();
         driver.get(basicUrl);
@@ -30,89 +30,73 @@ public class Tests {
 
     //Case1
     @Test
-    public void CheckRequiredElementsWelcomePage() {
+    public void requiredElementsWelcomePageTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
         Assertions.assertTrue(welcomePage.getTextConfirmationCheckbox().contains("I am of legal drinking age in"));
-        Assertions.assertTrue(welcomePage.getElementCheckbox().isDisplayed());
-        Assertions.assertTrue(welcomePage.getElementDropdown().isDisplayed());
-        Assertions.assertFalse(welcomePage.getElementWelcomeBtn().isEnabled());
+        Assertions.assertTrue(welcomePage.getCheckbox().isDisplayed());
+        Assertions.assertTrue(welcomePage.getDropdown().isDisplayed());
+        Assertions.assertFalse(welcomePage.getWelcomeBtn().isEnabled());
     }
 
     //Case2
     @Test
-    public void CheckNavigateToMainPage() {
+    public void navigateToMainPageTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
+        HomePage homePage=welcomePage.clickBtnsToEnterOnHomePage();
+        Assertions.assertTrue(homePage.getHomePageIdentificator().isDisplayed());
     }
 
     //Case3
     @Test
-    public void CheckRequiredElementsDisplayed() {
+    public void requiredElementsDisplayedTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        Assertions.assertTrue(homePage.getElementMenu().isDisplayed());
-        Assertions.assertTrue(homePage.getElementLargeWelcome().isDisplayed());
-        Assertions.assertTrue(homePage.getElementLargeSecondString().isDisplayed());
-        Assertions.assertTrue(homePage.getElementFindWine().isDisplayed());
-        Assertions.assertTrue(homePage.getElementFooter().isDisplayed());
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        Assertions.assertTrue(homePage.getMenu().isDisplayed());
+        Assertions.assertTrue(homePage.getLargeWelcome().isDisplayed());
+        Assertions.assertTrue(homePage.getLargeSecondString().isDisplayed());
+        Assertions.assertTrue(homePage.getFindWine().isDisplayed());
+        Assertions.assertTrue(homePage.getFooter().isDisplayed());
 
     }
 
     //Case4
     @Test
-    public void CheckMenuButtonLogicOpenHeader() {
+    public void menuButtonLogicOpenHeaderTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        Assertions.assertTrue(homePage.getElementMenu().isDisplayed());
-        homePage.clickOnMenu();
-        HeaderHomePage headerHomePage = new HeaderHomePage(driver);
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        Assertions.assertTrue(homePage.getMenu().isDisplayed());
+        HeaderHomePage headerHomePage = homePage.clickOnMenu();
         headerHomePage.waitForYellowTail();
-        Assertions.assertTrue(headerHomePage.getElementYellowTail().isDisplayed());
-        Assertions.assertTrue(headerHomePage.getElementWines().isDisplayed());
-        Assertions.assertTrue(headerHomePage.getElementToBuy().isDisplayed());
-        Assertions.assertTrue(headerHomePage.getElementCocktails().isDisplayed());
-        Assertions.assertTrue(headerHomePage.getElementOurStory().isDisplayed());
-        Assertions.assertTrue(headerHomePage.getElementFaqs().isDisplayed());
-        Assertions.assertTrue(headerHomePage.getElementContact().isDisplayed());
+        Assertions.assertTrue(headerHomePage.getYellowTail().isDisplayed());
+        Assertions.assertTrue(headerHomePage.getWines().isDisplayed());
+        Assertions.assertTrue(headerHomePage.getToBuy().isDisplayed());
+        Assertions.assertTrue(headerHomePage.getCocktails().isDisplayed());
+        Assertions.assertTrue(headerHomePage.getOurStory().isDisplayed());
+        Assertions.assertTrue(headerHomePage.getFaqs().isDisplayed());
+        Assertions.assertTrue(headerHomePage.getContact().isDisplayed());
         headerHomePage.clickOnYellowTail();
-        Assertions.assertTrue(homePage.getElementMenu().isDisplayed());
+        Assertions.assertTrue(homePage.getMenu().isDisplayed());
     }
 
     //Case5
     @Test
-    public void CheckMenuButtonLogicCloseHeader() {
+    public void menuButtonLogicCloseHeaderTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        homePage.clickOnMenu();
-        HeaderHomePage headerHomePage = new HeaderHomePage(driver);
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        HeaderHomePage headerHomePage = homePage.clickOnMenu();
         headerHomePage.waitForYellowTail();
         headerHomePage.clickOnYellowTail();
-        Assertions.assertTrue(homePage.getElementMenu().isDisplayed());
+        Assertions.assertTrue(homePage.getMenu().isDisplayed());
     }
 
     //Case6
     @Test
-    public void CheckGlobalNavLogic() {
+    public void globalNavLogicTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        homePage.clickOnMenu();
-        HeaderHomePage headerHomePage = new HeaderHomePage(driver);
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        HeaderHomePage headerHomePage = homePage.clickOnMenu();
         headerHomePage.clickOnLocation();
-        headerHomePage.clickElementLocationChina();
+        headerHomePage.clickLocationChina();
         headerHomePage.waitChinaUrl();
         Assertions.assertTrue(driver.getCurrentUrl().contains(".cn"));
 
@@ -120,79 +104,56 @@ public class Tests {
 
     //Case8
     @Test
-    public void CheckWhereToBuy() {
+    public void whereToBuyTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        homePage.clickOnMenu();
-        HeaderHomePage headerHomePage = new HeaderHomePage(driver);
-        headerHomePage.clickElementWhereToBuy();
-        StoresPage storesPage = new StoresPage(driver);
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        HeaderHomePage headerHomePage = homePage.clickOnMenu();
+        StoresPage storesPage = headerHomePage.clickWhereToBuy();
         storesPage.enterStoreLocation();
-        storesPage.clickCofirmBtn();
+        storesPage.clickConfirmBtn();
         storesPage.waitForResults();
-        Assertions.assertTrue(storesPage.getElementResults().isDisplayed());
+        Assertions.assertTrue(storesPage.getResults().isDisplayed());
     }
 
     //Case9
     @Test
-    public void CheckCocktailsSelectOneWine() {
+    public void cocktailsSelectOneWineTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        homePage.clickOnMenu();
-        HeaderHomePage headerHomePage = new HeaderHomePage(driver);
-        headerHomePage.clickElementCocktails();
-        CocktailsPage cocktailsPage = new CocktailsPage(driver);
-        cocktailsPage.clickElementDropdownWines();
-        cocktailsPage.clickElementRedWineCocktails();
-        for (WebElement item : cocktailsPage.getElementCocktailsResults()) {
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        HeaderHomePage headerHomePage = homePage.clickOnMenu();
+        CocktailsPage cocktailsPage = headerHomePage.clickCocktails();
+        cocktailsPage.clickRedWineCocktails();
+        for (WebElement item : cocktailsPage.getCocktailsResults()) {
             Assertions.assertTrue(item.isDisplayed());
-            Assertions.assertEquals(7, cocktailsPage.getElementCocktailsResults().size());
+            Assertions.assertEquals(7, cocktailsPage.getCocktailsResults().size());
         }
     }
 
     //Case10
     @Test
-    public void CheckCocktailsNavigateCocktailRecipePage() {
+    public void cocktailsNavigateCocktailRecipePageTest() throws InterruptedException {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        homePage.clickOnMenu();
-        HeaderHomePage headerHomePage = new HeaderHomePage(driver);
-        headerHomePage.clickElementCocktails();
-        CocktailsPage cocktailsPage = new CocktailsPage(driver);
-        Actions builder = new Actions(driver);
-        builder.moveToElement(cocktailsPage.getElementCocktailsRaspberryRose()).build().perform();
-        cocktailsPage.clickElementCocktailsRaspberryRose();
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        HeaderHomePage headerHomePage = homePage.clickOnMenu();
+        CocktailsPage cocktailsPage = headerHomePage.clickCocktails();
+        cocktailsPage.scrollToElement();
+        cocktailsPage.clickCocktailsRaspberryRose();
         Assertions.assertTrue(driver.getPageSource().contains("Ingredients"));
     }
 
     //Case11
     @Test
-    public void CheckCocktailsSelectSeveralWines() {
+    public void cocktailsSelectSeveralWinesTest() {
         WelcomePage welcomePage = new WelcomePage(driver);
-        welcomePage.clickOnCheckBox();
-        welcomePage.clickOnSelectLocation();
-        welcomePage.clickOnWelcomeBtn();
-        HomePage homePage = new HomePage(driver);
-        homePage.clickOnMenu();
-        HeaderHomePage headerHomePage = new HeaderHomePage(driver);
-        headerHomePage.clickElementCocktails();
-        CocktailsPage cocktailsPage = new CocktailsPage(driver);
-        cocktailsPage.clickElementDropdownWines();
-        cocktailsPage.clickElementRedWineCocktails();
-        cocktailsPage.clickElementSparklingWineCocktails();
-        Assertions.assertTrue(cocktailsPage.getElementDropdownWines().getText().contains("Multiple"));
-        for (WebElement item : cocktailsPage.getElementCocktailsResults2()) {
+        HomePage homePage = welcomePage.clickBtnsToEnterOnHomePage();
+        HeaderHomePage headerHomePage = homePage.clickOnMenu();
+        CocktailsPage cocktailsPage = headerHomePage.clickCocktails();
+        cocktailsPage.clickRedWineCocktails();
+        cocktailsPage.clickSparklingWineCocktails();
+        Assertions.assertTrue(cocktailsPage.getDropdownWines().getText().contains("Multiple"));
+        for (WebElement item : cocktailsPage.getCocktailsResults()) {
             Assertions.assertTrue(item.isDisplayed());
-            Assertions.assertEquals(18, cocktailsPage.getElementCocktailsResults2().size());
+            Assertions.assertEquals(18, cocktailsPage.getCocktailsResults().size());
         }
     }
 }

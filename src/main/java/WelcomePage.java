@@ -13,39 +13,34 @@ public class WelcomePage {
     }
 
     @FindBy(css = "div.confirmation-checkbox")
-    private WebElement searchElementText;
+    private WebElement Text;
     @FindBy(css = "div.confirmation-checkbox")
-    private WebElement searchElementCheckbox;
+    private WebElement Checkbox;
     @FindBy(css = ".agegate-selector-options")
-    private WebElement searchElementDropdown;
+    private WebElement Dropdown;
     @FindBy(css = "input[value=\"Welcome\"]")
-    private WebElement searchElementWelcomeBtn;
+    private WebElement WelcomeBtn;
 
     public String getTextConfirmationCheckbox() {
-        return searchElementText.getText();
+        return Text.getText();
     }
 
-    public WebElement getElementCheckbox() {
-        return searchElementCheckbox;
+    public WebElement getCheckbox() {
+        return Checkbox;
     }
 
-    public WebElement getElementDropdown() {
-        return searchElementDropdown;
+    public WebElement getDropdown() {
+        return Dropdown;
     }
 
-    public WebElement getElementWelcomeBtn() {
-        return searchElementWelcomeBtn;
+    public WebElement getWelcomeBtn() {
+        return WelcomeBtn;
     }
 
-    public void clickOnCheckBox() {
-        searchElementCheckbox.click();
-    }
-
-    public void clickOnSelectLocation() {
-        new Select(searchElementDropdown).selectByValue("eu");
-    }
-
-    public void clickOnWelcomeBtn() {
-        searchElementWelcomeBtn.click();
+    public HomePage clickBtnsToEnterOnHomePage() {
+        Checkbox.click();
+        new Select(Dropdown).selectByValue("eu");
+        WelcomeBtn.click();
+        return new HomePage(driver);
     }
 }

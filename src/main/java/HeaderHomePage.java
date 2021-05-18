@@ -16,27 +16,27 @@ public class HeaderHomePage {
     }
 
     @FindBy(css = ".-active .main-nav a>img")
-    private WebElement searchElementYellowTail;
+    private WebElement YellowTail;
     @FindBy(css = ".inner a[href$=\".com/wines/\"]")
-    private WebElement searchElementWines;
+    private WebElement Wines;
     @FindBy(css = ".inner a[href$=\".com/stores/\"]")
-    private WebElement searchElementToBuy;
+    private WebElement ToBuy;
     @FindBy(css = ".inner a[href$=\".com/cocktails/\"]")
-    private WebElement searchElementCocktails;
+    private WebElement Cocktails;
     @FindBy(css = ".inner a[href$=\".com/our-story/\"]")
-    private WebElement searchElementOurStory;
+    private WebElement OurStory;
     @FindBy(css = ".inner a[href$=\".com/faqs/\"]")
-    private WebElement searchElementFaqs;
+    private WebElement Faqs;
     @FindBy(css = ".inner a[href$=\".com/contact/\"]")
-    private WebElement searchElementContact;
+    private WebElement Contact;
     @FindBy(css = ".inner .fa.fa-globe.fa-lg")
-    private WebElement searchElementLocation;
+    private WebElement Location;
     @FindBy(css = "a.country[data-key=\"CN\"]")
-    private WebElement searchElementLocationChina;
+    private WebElement LocationChina;
 
     public void waitForYellowTail() {
         (new WebDriverWait(driver, Duration.ofSeconds(2)))
-                .until(ExpectedConditions.elementToBeClickable(searchElementYellowTail));
+                .until(ExpectedConditions.elementToBeClickable(YellowTail));
     }
 
     public void waitChinaUrl() {
@@ -44,52 +44,54 @@ public class HeaderHomePage {
                 .until(ExpectedConditions.urlContains(".cn"));
     }
 
-    public WebElement getElementYellowTail() {
-        return searchElementYellowTail;
+    public WebElement getYellowTail() {
+        return YellowTail;
     }
 
-    public WebElement getElementWines() {
-        return searchElementWines;
+    public WebElement getWines() {
+        return Wines;
     }
 
-    public WebElement getElementToBuy() {
-        return searchElementToBuy;
+    public WebElement getToBuy() {
+        return ToBuy;
     }
 
-    public WebElement getElementCocktails() {
-        return searchElementCocktails;
+    public WebElement getCocktails() {
+        return Cocktails;
     }
 
-    public WebElement getElementOurStory() {
-        return searchElementOurStory;
+    public WebElement getOurStory() {
+        return OurStory;
     }
 
-    public WebElement getElementFaqs() {
-        return searchElementFaqs;
+    public WebElement getFaqs() {
+        return Faqs;
     }
 
-    public WebElement getElementContact() {
-        return searchElementContact;
+    public WebElement getContact() {
+        return Contact;
     }
 
     public void clickOnYellowTail() {
-        searchElementYellowTail.click();
+        YellowTail.click();
     }
 
     public void clickOnLocation() {
-        searchElementLocation.click();
+        Location.click();
     }
 
-    public void clickElementLocationChina() {
-        searchElementLocationChina.click();
+    public void clickLocationChina() {
+        LocationChina.click();
     }
 
-    public void clickElementWhereToBuy() {
-        searchElementToBuy.click();
+    public StoresPage clickWhereToBuy() {
+        ToBuy.click();
+        return new StoresPage(driver);
     }
 
-    public void clickElementCocktails() {
-        searchElementCocktails.click();
+    public CocktailsPage clickCocktails() {
+        Cocktails.click();
+       return new CocktailsPage(driver);
     }
 
 }

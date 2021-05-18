@@ -12,37 +12,42 @@ public class HomePage {
     }
 
     @FindBy(css = ".fa.fa-bars")
-    private WebElement searchElementMenu;
+    private WebElement Menu;
     @FindBy(css = ".content.animation-screen.-one>h2")
-    private WebElement searchElementLargeWelcome;
+    private WebElement LargeWelcome;
     @FindBy(css = ".content.animation-screen.-one p.header-sub-copy")
-    private WebElement searchElementLargeSecondString;
+    private WebElement LargeSecondString;
     @FindBy(css = ".content.animation-screen.-one [aria-label]")
-    private WebElement searchElementFindWine;
+    private WebElement FindWine;
     @FindBy(css = ".primary-footer")
-    private WebElement searchElementFooter;
+    private WebElement Footer;
+    @FindBy (css = ".animationOne")
+    private WebElement HomePageIdentificator;
 
-    public WebElement getElementMenu() {
-        return searchElementMenu;
+    public WebElement getHomePageIdentificator() {return HomePageIdentificator;}
+
+    public WebElement getMenu() {
+        return Menu;
     }
 
-    public WebElement getElementLargeWelcome() {
-        return searchElementLargeWelcome;
+    public WebElement getLargeWelcome() {
+        return LargeWelcome;
     }
 
-    public WebElement getElementLargeSecondString() {
-        return searchElementLargeSecondString;
+    public WebElement getLargeSecondString() {
+        return LargeSecondString;
     }
 
-    public WebElement getElementFindWine() {
-        return searchElementFindWine;
+    public WebElement getFindWine() {
+        return FindWine;
     }
 
-    public WebElement getElementFooter() {
-        return searchElementFooter;
+    public WebElement getFooter() {
+        return Footer;
     }
 
-    public void clickOnMenu() {
-        searchElementMenu.click();
+    public HeaderHomePage clickOnMenu() {
+        Menu.click();
+        return new HeaderHomePage(driver);
     }
 }
